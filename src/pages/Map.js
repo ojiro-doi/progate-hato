@@ -1,65 +1,54 @@
 import { GoogleMap, LoadScript, MarkerF } from '@react-google-maps/api';
-import { useState, useEffect } from 'react';
-import axios from 'axios';  //javascriptHTTPリクエストを作成するためのライブラリ
+import { useState, useEffect, useMemo } from 'react';
 
-const containerStyle = {
-  height: "80vh",
-  width: "100%",
-};
+  const containerStyle = {
+    height: "80vh",
+    width: "100%",
+  };
 
   function Map() {
 
-    const [loaded, setLoaded] = useState(false);
     const [countryName, setCountryName] = useState('');
-    const [center, setCenter] = useState(Math.random() * 180 - 90, Math.random() * 360 - 180);
+    const [center, setCenter] = useState({lat: 35.68, lng: 139.76});
+
+    const countryList = useMemo(() => [
+      {name: '日本', lat: 35.68, lng: 139.76},
+      {name: 'アメリカ', lat: 37.77, lng: -122.42},
+      {name: 'オーストラリア', lat: -35.28, lng: 149.13},
+      {name: '中華人民共和国', lat: 39.91, lng: 116.39},
+      {name: 'インド', lat: 28.61, lng: 77.23},
+      {name: 'イギリス', lat: 51.51, lng: -0.13},
+      {name: 'フランス', lat: 48.86, lng: 2.35},
+      {name: 'ドイツ', lat: 52.52, lng: 13.40},
+      {name: 'イタリア', lat: 41.89, lng: 12.49},
+      {name: 'ブラジル', lat: -15.78, lng: -47.93},
+      {name: 'カナダ', lat: 45.42, lng: -75.70},
+      {name: 'ロシア', lat: 55.75, lng: 37.62},
+      {name: 'ブラジル', lat: -15.78, lng: -47.93},
+
+    ], []); // useMemoを使用してcountryListを初期化
 
     useEffect(() => {
-      getCountryName(center.lat, center.lng)
-        //取得成功
-        .then(name => setCountryName(name))
-        //取得失敗
-        .catch(error => {
-          // 国名が取得できなかった場合、centerをランダムな緯度経度に更新
-          setCenter({
-            lat: Math.random() * 180 - 90,
-            lng: Math.random() * 360 - 180
-          });
-        });
-    }, [center]);
-
-    async function getCountryName(lat, lng) {
-      const response = await axios.get(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lng}&key=${process.env.REACT_APP_GOOGLE_MAP_API_KEY}`);
-      //データを非同期に取得するためにaxios.getを使用
-      //Google Maps Geocoding APIを使用して、緯度と経度から国名を取得
-      if (response.data.status === 'OK') {
-        const results = response.data.results;
-        if (results[0]) {
-          const addressComponents = results[0].address_components;
-          const countryComponent = addressComponents.find(component => component.types.includes('country'));
-          if (countryComponent) {
-            return countryComponent.long_name; //国名を返す
-          }
-        }
-      }
-  
-      throw new Error('国名が取得できませんでした');
-    }
+      const randomCountry = countryList[Math.floor(Math.random() * countryList.length)];
+      setCountryName(randomCountry.name);
+      setCenter({lat: randomCountry.lat, lng: randomCountry.lng});
+    }, [countryList]); //初回レンダリング時のみ実行->countryListは定数
 
     return (
-<LoadScript googleMapsApiKey={process.env.REACT_APP_GOOGLE_MAP_API_KEY} onLoad={() => setLoaded(true)}>
-  {loaded && countryName && (  // loadedとcountryNameがtrueの場合に表示
-    <>
-      <p><strong>国名：{countryName}</strong></p>
-      <GoogleMap
-        mapContainerStyle={containerStyle}
-        center={center}
-        zoom={10}
-      >
-        <MarkerF position={center}/>
-      </GoogleMap>
-    </>
-  )}
-</LoadScript>
+    <LoadScript googleMapsApiKey={process.env.REACT_APP_GOOGLE_MAP_API_KEY}>
+      <>
+        <p className='m-3 text-center text-4xl'><strong>国名：{countryName}</strong></p>
+        <div className='border-2 border-blue-500 m-4'>
+          <GoogleMap
+            mapContainerStyle={containerStyle}
+            center={center}
+            zoom={10}
+          >
+            <MarkerF position={center}/>
+          </GoogleMap>
+        </div>
+      </>
+    </LoadScript>
     );
   }
 
