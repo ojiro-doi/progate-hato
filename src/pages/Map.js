@@ -46,20 +46,20 @@ const containerStyle = {
     }
 
     return (
-      <LoadScript googleMapsApiKey={process.env.REACT_APP_GOOGLE_MAP_API_KEY} onLoad={() => setLoaded(true)}>
-        {loaded && (  //loadedがtrueの場合に表示
-         <>
-            <p><strong>国名：{countryName}</strong></p>
-            <GoogleMap
-              mapContainerStyle={containerStyle}
-              center={center}
-              zoom={10}
-            >
-              <MarkerF position={center}/>
-            </GoogleMap>
-          </>
-        )}
-      </LoadScript>
+<LoadScript googleMapsApiKey={process.env.REACT_APP_GOOGLE_MAP_API_KEY} onLoad={() => setLoaded(true)}>
+  {loaded && countryName && (  // loadedとcountryNameがtrueの場合に表示
+    <>
+      <p><strong>国名：{countryName}</strong></p>
+      <GoogleMap
+        mapContainerStyle={containerStyle}
+        center={center}
+        zoom={10}
+      >
+        <MarkerF position={center}/>
+      </GoogleMap>
+    </>
+  )}
+</LoadScript>
     );
   }
 
