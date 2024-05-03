@@ -68,7 +68,7 @@ const Chat = () => {
         // HTTPヘッダー(認証)
         headers: {
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${ API_KEY }`
+        'Authorization': `Bearer ${XXXXX}`
         }
       });
  
