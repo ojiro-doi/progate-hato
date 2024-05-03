@@ -4,6 +4,7 @@ import Youtube from './Youtube';
 import { countryList } from '../components/CountryList';
 import CountryListSelect from '../components/CountryListSelect';
 import axios from 'axios';
+import Chat from './chat';
 
 function Result() {
   const [countryName, setCountryName] = useState('');
@@ -41,6 +42,7 @@ function Result() {
       <CountryListSelect countryName={countryName} setCountryName={setCountryName} setCenter={setCenter}/>
       <Map countryName={countryName} center={center} />
       <Youtube videos={videos}/>
+      <Chat/>
     </div>
   );
 }
