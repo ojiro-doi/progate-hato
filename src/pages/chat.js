@@ -3,8 +3,7 @@ import axios from 'axios';
  
 const API_URL = 'https://api.openai.com/v1/';
 const MODEL = 'gpt-4-turbo';
-const API_KEY='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';
- 
+
 const Chat = () => {
   // メッセージの状態管理用のステート
   const [ message, setMessage ] = useState( '' );
