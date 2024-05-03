@@ -1,16 +1,17 @@
 import React from 'react';
+import { memo } from 'react';
 import { countryList } from '../components/CountryList';
 
-const CountryListSelect = ({ countryName, setCountryName,setCenter }) => {
+const CountryListSelect = memo(({ countryName, setCountryName, setCenter }) => {
   return (
     <div>
-      {/* {console.log('countryList: ', countryList)} */}
       <select
         value={countryName}
         onChange={(e) => {
-          console.log('countryList[e.target.value]: ', countryList[e.target.value]);
+          console.log('e.target.value: ', e.target.value);  
+          console.log('countryList[e.target.value].name: ', countryList[e.target.value].name);
           setCountryName(countryList[e.target.value].name);
-          setCenter({lat:countryList[e.target.value].lat,lng:countryList[e.target.value].lng});
+          setCenter({ lat: countryList[e.target.value].lat, lng: countryList[e.target.value].lng });
         }}
       >
         {Object.keys(countryList).map((country) => (
@@ -21,6 +22,6 @@ const CountryListSelect = ({ countryName, setCountryName,setCenter }) => {
       </select>
     </div>
   );
-};
+});
 
 export default CountryListSelect;

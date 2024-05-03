@@ -13,6 +13,6 @@ export const countryList = [
   { name: 'カナダ', lat: 45.42, lng: -75.7 },
   { name: 'ロシア', lat: 55.75, lng: 37.62 },
   { name: 'ブラジル', lat: -15.78, lng: -47.93 },
-];
+]; 
 
 export default countryList;

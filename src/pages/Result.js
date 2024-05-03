@@ -5,10 +5,11 @@ import Map from '../components/Map';
 import Search_Header from '../components/Search_Header';
 import Youtube from './Youtube';
 import axios from 'axios';
+import RandomDisplay from '../components/RandomDisplay';
 
 function Result() {
-  const [countryName, setCountryName] = useState('');
-  const [center, setCenter] = useState({ lat: 35.68, lng: 139.76 });
+  const [countryName, setCountryName] = useState(countryList[0].name);
+  const [center, setCenter] = useState('');
   const [videos, setVideos] = useState([]);
 
   // Youtube APIを呼び出す関数
@@ -33,6 +34,7 @@ function Result() {
 
   return (
     <div>
+      <RandomDisplay countryName={countryName} setCountryName={setCountryName} setCenter={setCenter}/>
       <CountryListSelect countryName={countryName} setCountryName={setCountryName} setCenter={setCenter}/>
       <Map countryName={countryName} center={center} />
       <Search_Header onSearchYoutube={onSearchYoutube} />
