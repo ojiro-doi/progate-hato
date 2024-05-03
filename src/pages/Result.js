@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import Map from '../components/Map';  
 import Youtube from './Youtube';
-import { useState, useEffect} from 'react';
 import { countryList } from '../components/CountryList';
 import CountryListSelect from '../components/CountryListSelect';
 import axios from 'axios';
@@ -45,8 +43,8 @@ function Result() {
     <div>
       <CountryListSelect countryName={countryName} setCountryName={setCountryName} setCenter={setCenter}/>
       <Map countryName={countryName} center={center} />
-      <Youtube videos={videos}/>
       <PresWiki countryName={countryName}/>
+      <Youtube videos={videos}/>
     </div>
   );
 }
