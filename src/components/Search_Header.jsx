@@ -3,7 +3,6 @@ import axios from 'axios';
 import _ from 'lodash';
 
 export default class Search_Header extends React.Component {
-
     state = {
         keyword: "",
     };
@@ -21,7 +20,7 @@ export default class Search_Header extends React.Component {
           .catch(() => {
               console.log('通信に失敗しました');
           });
-      }
+    }
 
     handleChangeInput = (e) => {
         this.setState({keyword: e.target.value});
@@ -30,14 +29,16 @@ export default class Search_Header extends React.Component {
 
     _debounce = _.debounce(value => {
         this.props.onSearchYoutube(value);
-    },200);
+    }, 200);
 
     render() {
         return (
-            <div style={{marginTop: '20px', textAlign:'center'}}>
+            <div style={{ marginTop: '20px', textAlign: 'center' }}>
                 <input 
+                  style={{color: 'black', padding: '10px 20px', fontSize: '16px', border: 'none', borderRadius: '4px' }}
                   onChange={this.handleChangeInput}
                   value={this.state.keyword}
+                  placeholder="Search YouTube"
                 />
             </div>
         )
