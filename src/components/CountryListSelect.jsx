@@ -2,9 +2,9 @@ import React from 'react';
 import { countryList } from '../components/CountryList';
 
 const CountryListSelect = ({ countryName, setCountryName,setCenter }) => {
+
   return (
     <div>
-      {/* {console.log('countryList: ', countryList)} */}
       <select
         value={countryName}
         onChange={(e) => {
