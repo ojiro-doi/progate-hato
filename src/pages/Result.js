@@ -3,8 +3,10 @@ import Youtube from './Youtube';
 import { countryList } from '../components/CountryList';
 import CountryListSelect from '../components/CountryListSelect';
 import axios from 'axios';
+import Chat from './chat';
 import { PresWiki } from '../components/PresWiki';
 import Map from '../components/Map';  
+
 
 function Result() {
 
@@ -45,6 +47,7 @@ function Result() {
       <Map countryName={countryName} center={center} />
       <PresWiki countryName={countryName}/>
       <Youtube videos={videos}/>
+      <Chat/>
     </div>
   );
 }
