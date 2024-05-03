@@ -3,6 +3,7 @@ import { memo } from 'react';
 import { countryList } from '../components/CountryList';
 
 const CountryListSelect = memo(({ countryName, setCountryName, setCenter }) => {
+
   return (
     <div>
       <select
