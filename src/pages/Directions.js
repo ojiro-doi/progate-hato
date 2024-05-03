@@ -54,8 +54,6 @@ function Directions() {
       }
     };
 
-
-
   return (
     <LoadScript googleMapsApiKey={process.env.REACT_APP_GOOGLE_MAP_API_KEY}>
       <GoogleMap
