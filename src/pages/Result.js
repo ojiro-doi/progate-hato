@@ -3,10 +3,10 @@ import Youtube from './Youtube';
 import { countryList } from '../components/CountryList';
 import CountryListSelect from '../components/CountryListSelect';
 import axios from 'axios';
+import RandomDisplay from '../components/RandomDisplay';
 import Chat from './chat';
 import { PresWiki } from '../components/PresWiki';
 import Map from '../components/Map';  
-
 
 function Result() {
 
@@ -43,6 +43,7 @@ function Result() {
 
   return (
     <div>
+      <RandomDisplay countryName={countryName} setCountryName={setCountryName} setCenter={setCenter}/>
       <CountryListSelect countryName={countryName} setCountryName={setCountryName} setCenter={setCenter}/>
       <Map countryName={countryName} center={center} />
       <PresWiki countryName={countryName}/>
