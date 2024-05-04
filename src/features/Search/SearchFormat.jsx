@@ -1,10 +1,9 @@
 import React, { useState } from "react";
-import RandomDisplay from "./RouletteDisplay";
 import SelectList from "./SelectList";
 import  RouletteDisplay  from "./RouletteDisplay";
 
 const InputFormBudget = () => {
-  const [option, setOption] = useState("");
+  const [option, setOption] = useState("ランダム");
 
   return (
     <div className="container mx-auto p-4">
@@ -15,8 +14,8 @@ const InputFormBudget = () => {
           onChange={(e) => setOption(e.target.value)} // e.target.valueを使用して選択された値を更新
           className="border-2 border-gray-300 rounded-md mx-2 p-2"
         >
-          <option value="random">ランダム</option>
-          <option value="choose">自分の運命は自分で決めるものだ</option>
+          <option value="ランダム">ランダム</option>
+          <option value="自分の運命は自分で決めるものだ">自分の運命は自分で決めるものだ</option>
           <option value="question">質問</option>
         </select>
         で決める！
@@ -26,7 +25,7 @@ const InputFormBudget = () => {
       </h2>
       <div className="ml-20 mb-10 flex justify-center"></div>
         {option === "ランダム" && <RouletteDisplay />}
-        {option === "自分の運命は自分で決めるものだ" && <SelectList></SelectList>}
+        {option === "自分の運命は自分で決めるものだ" && <SelectList/>}
     </div>
   );
 };
