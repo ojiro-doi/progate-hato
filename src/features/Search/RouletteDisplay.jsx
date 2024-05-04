@@ -34,7 +34,7 @@ const RandomDisplay = memo(() => {
     }
   }, [start]);
   return (
-    <div>
+    <div className='flex justify-center'>
       <div>
         <p>下のボタンを押してや</p>
         <p>{countryList[index].name}</p>
