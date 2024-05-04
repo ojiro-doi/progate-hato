@@ -1,18 +1,27 @@
-import React from 'react';
-import { memo } from 'react';
-import { countryList } from './CountryList';
+import React from "react";
+import { memo } from "react";
+import { countryList } from "./CountryList";
+import { CountryContext } from "../../Context/CountryProvider";
 
-const CountryListSelect = memo(({ countryName, setCountryName, setCenter }) => {
+const CountryListSelect = memo(() => {
+  const { selectedCountry, setSelectedCountry } =
+    React.useContext(CountryContext);
 
   return (
     <div>
       <select
-        value={countryName}
+        value={selectedCountry.name}
         onChange={(e) => {
-          console.log('e.target.value: ', e.target.value);  
-          console.log('countryList[e.target.value].name: ', countryList[e.target.value].name);
-          setCountryName(countryList[e.target.value].name);
-          setCenter({ lat: countryList[e.target.value].lat, lng: countryList[e.target.value].lng });
+          console.log("e.target.value: ", e.target.value);
+          console.log(
+            "countryList[e.target.value].name: ",
+            countryList[e.target.value].name
+          );
+          setSelectedCountry(countryList[e.target.value].name);
+          setSelectedCountry({
+            lat: countryList[e.target.value].lat,
+            lng: countryList[e.target.value].lng,
+          });
         }}
       >
         {Object.keys(countryList).map((country) => (

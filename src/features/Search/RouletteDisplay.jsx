@@ -1,10 +1,12 @@
 import React from 'react';
 import { useCallback, useEffect, useState, memo } from 'react';
 import { countryList } from './CountryList';
+import {CountryContext} from '../../Context/CountryProvider';
 
-const RandomDisplay = memo(({ countryName, setCountryName, setCenter }) => {
+const RandomDisplay = memo(() => {
   const [start, setStart] = useState(false);
   const [index, setIndex] = useState(0);
+  const { selectedCountry, setSelectedCountry } = React.useContext(CountryContext);
 
   //ボタンの文言を変更する処理
   const changeRoulette = useCallback(() => {
@@ -26,8 +28,8 @@ const RandomDisplay = memo(({ countryName, setCountryName, setCenter }) => {
       }, 50); //ルーレットの中身を切り替える速度
       return () => clearInterval(interval);
     } else if (!start) {
-      setCountryName(countryList[index].name);
-      setCenter({ lat: countryList[index].lat, lng: countryList[index].lng });
+      setSelectedCountry(countryList[index].name);
+      setSelectedCountry({ lat: countryList[index].lat, lng: countryList[index].lng });
       return () => clearInterval();
     }
   }, [start]);
