@@ -1,5 +1,10 @@
-import React, { useState } from 'react';
-import { CountryContext } from './CountryContext';
+import React, { createContext,useState } from 'react';
+// import { CountryContext } from './CountryContext';
+
+export const CountryContext = createContext({
+  selectedCountry: { name: '' }, // デフォルト値を設定
+  setSelectedCountry: () => {},
+});
 
 export const CountryProvider = ({ children }) => {
     const [selectedCountry, setSelectedCountry] = useState({ name: '' }); // 初期値を設定
