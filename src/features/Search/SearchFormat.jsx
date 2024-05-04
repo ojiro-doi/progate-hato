@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import SelectList from "./SelectList";
 import  RouletteDisplay  from "./RouletteDisplay";
+import  ChatSearch  from "./ChatSearch";
 
 const InputFormBudget = () => {
   const [option, setOption] = useState("ランダム");
@@ -26,6 +27,7 @@ const InputFormBudget = () => {
       <div className="ml-20 mb-10 flex justify-center"></div>
         {option === "ランダム" && <RouletteDisplay />}
         {option === "自分の運命は自分で決めるものだ" && <SelectList/>}
+        {option === "question" && <ChatSearch />}
     </div>
   );
 };
