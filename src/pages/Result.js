@@ -1,27 +1,32 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect, useContext } from "react";
 import Header from "../components/Header";
-import Youtube from './Youtube';
-import { countryList } from '../features/Search/CountryList';
-import CountryListSelect from '../features/Search/CountryListSelect';
-import axios from 'axios';
-import RandomDisplay from '../features/Search/RouletteDisplay';
-import Chat from '../features/Result/chat';
-import { PresWiki } from '../features/Result/PressWiki';
-import Map from '../features/Result/Map'; 
-import { LoadScript } from '@react-google-maps/api';
-import { CountryContext } from '../Context/CountryProvider'; 
-
+import Youtube from "./Youtube";
+import { countryList } from "../features/Search/CountryList";
+import CountryListSelect from "../features/Search/CountryListSelect";
+import axios from "axios";
+import RandomDisplay from "../features/Search/RouletteDisplay";
+import Chat from "../features/Result/chat";
+import { PresWiki } from "../features/Result/PressWiki";
+import Map from "../features/Result/Map";
+import { CountryContext } from "../Context/CountryProvider";
 
 function Result() {
   const { selectedCountry, setSelectedCountry } = useContext(CountryContext);
+  console.log("result-selectedCountry.name:", selectedCountry.name); // ここでselectedCountryの値を確認
+
   const center = { lat: selectedCountry.lat, lng: selectedCountry.lng };
   const [videos, setVideos] = useState([]);
 
   useEffect(() => {
+    console.log("selectedCountryが変更");
     if (selectedCountry.name) {
       onSearchYoutube(`${selectedCountry.name} 旅行`);
     }
-  }, [selectedCountry]);
+    return () => {
+      console.log("cleanUp");
+
+    };
+  }, [selectedCountry]); // selectedCountryが変更された時のみ検索を再実行
 
   const onSearchYoutube = (searchQuery) => {
     const url = `https://www.googleapis.com/youtube/v3/search?type=video&part=snippet&q=${encodeURIComponent(
@@ -48,7 +53,7 @@ function Result() {
             <h1 className="text-5xl ml-4 mt-5 pb-3 border-b-2 border-black">
               Map
             </h1>
-            <Map selectedCountry={selectedCountry.name} center={center} />
+              <Map selectedCountry={selectedCountry.name} center={center} />
             <h1 className="text-5xl ml-4 mt-20 pb-3 border-b-2 border-black">
               About
             </h1>

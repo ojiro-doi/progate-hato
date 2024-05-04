@@ -1,6 +1,6 @@
 import '../Tailwind.css';
 import Header from '../components/Header';
-import InputFormBudget from '../features/Search/SearchFormat';
+import InputFormBudget from '../features/Search/InputFormBudget';
 
 function Search() {
 
