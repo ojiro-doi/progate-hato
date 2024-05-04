@@ -43,12 +43,25 @@ function Result() {
 
 
   return (
-    <div>
-      <RandomDisplay countryName={countryName} setCountryName={setCountryName} setCenter={setCenter}/>
-      <CountryListSelect countryName={countryName} setCountryName={setCountryName} setCenter={setCenter}/>
-      <Map countryName={countryName} center={center} />
-      <PresWiki countryName={countryName}/>
-      <Youtube videos={videos}/>
+    <div className='p-5'>
+      <div className='flex'>
+        <div className='w-3/5'>
+        <CountryListSelect
+          countryName={countryName}
+          setCountryName={setCountryName}
+          setCenter={setCenter}
+          className="countrylistselect"
+        />
+        <h1 className=' text-5xl ml-4 mt-5 pb-3 border-b-2 border-black'>Map</h1>
+          <Map countryName={countryName} center={center} />
+          <h1 className='text-5xl ml-4 mt-5 pb-3 border-b-2 border-black'>About</h1>
+          <PresWiki countryName={countryName}/>
+        </div>
+        <div className='w-2/5'>
+          <h1 className='text-5xl ml-4 mt-5 text-left pb-3 border-b-2 border-black'>Youtube</h1>
+          {/* <Youtube videos={videos}/> */}
+        </div>
+      </div>
       <Chat/>
 
     </div>
