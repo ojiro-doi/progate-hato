@@ -7,13 +7,13 @@ import axios from 'axios';
 import RandomDisplay from '../features/Search/RouletteDisplay';
 import Chat from '../features/Result/chat';
 import { PresWiki } from '../features/Result/PresWiki';
-import Map from '../features/Result/Map'; 
+import Map from '../features/Result/Map';
 import { LoadScript } from '@react-google-maps/api';
-import { CountryContext } from '../Context/CountryContext'; 
+import { CountryContext } from '../Context/CountryContext';
 
 
 function Result() {
-  const {selectedCountry} = useContext(CountryContext);
+  const { selectedCountry } = useContext(CountryContext);
   console.log('result-selectedCountry.name:', selectedCountry.name); // ここでselectedCountryの値を確認
 
   const center = { lat: selectedCountry.lat, lng: selectedCountry.lng };
@@ -58,15 +58,9 @@ function Result() {
     <div>
       <Header />
       <div className="p-5">
-        {/* <CountryListSelect
-          countryName={countryName}
-          setCountryName={setCountryName}
-          setCenter={setCenter}
-          className="countrylistselect text-5xl"
-        /> */}
-        <div className="flex mt-5">
-          <div className="w-3/5">
-            <h1 className=" text-5xl ml-4 mt-5 pb-3 border-b-2 border-black">
+        <div className="flex flex-col md:flex-row mt-5">
+          <div className="md:w-3/5">
+            <h1 className="text-5xl ml-4 mt-5 pb-3 border-b-2 border-black">
               Map
             </h1>
             <LoadScript googleMapsApiKey={process.env.REACT_APP_GOOGLE_MAP_API_KEY}>
@@ -77,7 +71,7 @@ function Result() {
             </h1>
             <PresWiki countryName={selectedCountry.name} />
           </div>
-          <div className="w-2/5">
+          <div className="md:w-2/5">
             <h1 className="text-5xl ml-4 mt-5 text-left pb-3 border-b-2 border-black">
               Youtube
             </h1>
