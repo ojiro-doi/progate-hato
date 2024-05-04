@@ -15,7 +15,7 @@ const Header = () => {
           <Link to={"/result"} className="md:ml-auto text-3xl mx-20">
             MAP
           </Link>
-          <Link to={"/result"} className="md:ml-auto text-3xl mx-20">
+          <Link to={"/Account"} className="md:ml-auto text-3xl mx-20">
             RATE
           </Link>
         </div>
