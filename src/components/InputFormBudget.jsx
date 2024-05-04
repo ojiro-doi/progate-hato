@@ -10,7 +10,7 @@ const InputFormBudget = () => {
   };
   return (
     <div className="container flex items-center flex-col">
-      <img src={piza} className="absolute" />
+      {/* <img src={piza} className="absolute" /> */}
       <div className="relative">
         <h1 className="text-5xl text-center mt-60 mb-4 margr">
           行き先は
