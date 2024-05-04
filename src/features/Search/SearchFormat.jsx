@@ -23,7 +23,7 @@ const InputFormBudget = () => {
       </h1>
       <h2 className="text-2xl md:text-5xl font-mono my-4 text-center">
         君の旅行先は！？
-      </h1>
+      </h2>
       <div className="ml-20 mb-10 flex justify-center"></div>
         {option === "ランダム" && <RouletteDisplay />}
         {option === "自分の運命は自分で決めるものだ" && <SelectList></SelectList>}
