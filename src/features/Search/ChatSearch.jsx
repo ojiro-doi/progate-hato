@@ -1,10 +1,12 @@
-import React, { useCallback, useEffect, useState, useRef } from 'react';
+import React, { useCallback, useEffect, useState, useRef, useContext} from 'react';
+import { CountryContext } from '../../Context/CountryProvider';
 import axios from 'axios';
- 
+import { Link } from 'react-router-dom';
+
 const API_URL = 'https://api.openai.com/v1/';
 const MODEL = 'gpt-4-turbo';
 
-const Country_Name = () => {
+const ChatSearch = () => {
   // メッセージの状態管理用のステート
   const [ message, setMessage ] = useState( '' );
   // 回答の状態管理用のステート
@@ -15,7 +17,8 @@ const Country_Name = () => {
   const [ loading, setLoading ] = useState( false );
   // 前回のメッセージの保持、比較用
   const prevMessageRef = useRef( '' );
- 
+  const { SelectedCountry, setSelectedCountry } = useContext(CountryContext);
+
   // 回答が取得されたとき
   useEffect( () => {
     // 直前のチャット内容
@@ -29,6 +32,46 @@ const Country_Name = () => {
         'content': message,
       }
     ];
+
+    // 回答の表示
+    setSelectedCountry({
+      name: answer,
+      lat: 0,
+      lng: 0
+    });
+
+    const axios = require('axios');
+
+  async function getCountryLatLng(countryName) {
+    const response = await axios.get(`http://api.geonames.org/searchJSON?name=${countryName}&maxRows=1&username=demo`);
+
+    if (response.data.geonames && response.data.geonames.length > 0) {
+      const { lat, lng } = response.data.geonames[0];
+      return { lat, lng };
+    } else {
+      throw new Error('Country not found');
+    }
+  }
+
+  if (answer) {
+    getCountryLatLng(answer)
+      .then(({ lat, lng }) => {
+        setSelectedCountry({
+          name: answer,
+          lat: lat,
+          lng: lng
+        });
+      })
+      .catch(console.error);
+  }
+
+  getCountryLatLng("Japan")
+    .then(({ lat, lng }) => {
+      console.log(`Japan: ${lat}, ${lng}`);
+    })
+    .catch(console.error);
+    
+
  
     // 会話の記録(直前のチャット内容の追加)
     setConversation( [ ...conversation, ...newConversation ] );
@@ -87,63 +130,48 @@ const Country_Name = () => {
   }, [ loading, message, conversation ] );
  
   // チャット内容
-  const ChatContent = React.memo( ( { prevMessage, answer } ) => {
+  const ChatContent = ({ prevMessage, answer }) => {
     return (
-      <div className='result'>
-        <div className='current-message'>
-          <h2>質問:</h2>
-          <p>{ prevMessage }</p>
+      <div style={{ marginTop: '20px', padding: '10px', backgroundColor: '#f5f5f5', borderRadius: '5px' }}>
+        <div style={{ marginBottom: '10px', padding: '10px', backgroundColor: '#d9edf7', borderRadius: '5px' }}>
+          <strong>あなた：</strong> {prevMessage}
         </div>
-        <div className='current-answer'>
-          <h2>回答:</h2>
-          <p>{ answer.split( /\n/ )
-                .map( ( item, index ) => {
-                  return (
-                    <React.Fragment key={ index }>
-                      { item }
-                      <br />
-                    </React.Fragment>
-                  );
-                } )
-              }
-          </p>
+        <div style={{ marginBottom: '10px', padding: '10px', backgroundColor: '#fcf8e3', borderRadius: '5px' }}>
+          <strong>AI：</strong> {answer}
         </div>
       </div>
-    )
-  } );
+    );
+  };
  
   // フォームの表示
   return (
     <div className='container'>
-      <form className='chat-form' onSubmit={ handleSubmit }>
-        <label>
+      <form className='chat-form' onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+        <label style={{ marginBottom: '10px', fontSize: '20px', fontWeight: 'bold' }}>
+          メッセージを入力してください
           <textarea
             className='message'
             rows='5'
             cols='50'
-            value={ message }
-            onChange={ e => {
-              setMessage( e.target.value ) ;
-            } }
+            value={message}
+            onChange={e => {
+              setMessage(e.target.value);
+            }}
+            style={{ marginTop: '10px', width: '100%', padding: '10px', fontSize: '16px', borderRadius: '5px', border: '1px solid #ccc' }}
           />
         </label>
-        <div className='submit'>
-          <button type="submit">質問する</button>
+        <div>
+          <button type="submit" style={{ marginTop: '10px', padding: '10px 20px', fontSize: '16px', borderRadius: '5px', border: 'none', backgroundColor: '#007BFF', color: '#fff' }}>
+            送信
+          </button>
+          <div className='p-3'>
+            <Link to="/result" className='text-blue-500 bg-sky-950'>NEXT</Link>
+          </div>
         </div>
       </form>
-      { loading && (
-        <div className='loading'>
-          <p>回答中...</p>
-        </div>
-      ) }
-      { answer && !loading && (
-        <ChatContent
-          prevMessage={ prevMessageRef.current }
-          answer={ answer }
-        />
-      ) }
+
+      <ChatContent prevMessage={prevMessageRef.current} answer={answer} />
     </div>
   );
 }
- 
-export default Country_Name;
+export default ChatSearch
