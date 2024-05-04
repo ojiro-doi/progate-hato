@@ -7,11 +7,13 @@ import {CountryContext} from '../../Context/CountryProvider';
 const RouletteDisplay = memo(() => {
   const [start, setStart] = useState(false);
   const [index, setIndex] = useState(0);
+  const [clickCount, setClickCount] = useState(0);
   const { selectedCountry, setSelectedCountry } = React.useContext(CountryContext);
-
+  console.log('selectedCountry: ', selectedCountry);
   //ボタンの文言を変更する処理
   const changeRoulette = useCallback(() => {
     setStart(!start);
+    setClickCount(clickCount + 1);
   }, [start]);
 
 
@@ -29,7 +31,7 @@ const RouletteDisplay = memo(() => {
         });
       }, 50); //ルーレットの中身を切り替える速度
       return () => clearInterval(interval);
-    } else if (!start) {
+    } else if (!start&&clickCount>0) {
       setSelectedCountry({
         name: countryList[index].name,
         lat: countryList[index].lat,

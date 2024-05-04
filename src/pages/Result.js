@@ -23,8 +23,8 @@ function Result() {
       onSearchYoutube(`${selectedCountry.name} 旅行`);
     }
     return () => {
-      console.log("cleanUp");
-
+      console.log("result_cleanUp");
+      console.log("selectedCountry:", selectedCountry);
     };
   }, [selectedCountry]); // selectedCountryが変更された時のみ検索を再実行
 
