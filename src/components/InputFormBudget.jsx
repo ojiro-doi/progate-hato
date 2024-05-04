@@ -1,23 +1,47 @@
-import React, { useState } from "react";
+import React, { useState, useContext, useEffect } from "react";
+import RandomDisplay from "../features/Search/RouletteDisplay";
+import CountryList from "../features/Search/CountryList";
 import { Link } from "react-router-dom";
+import { CountryContext } from '../Context/CountryContext';
 import piza from "../assets/piza.png";
 
 const InputFormBudget = () => {
   const [amount, setAmount] = useState("");
   const [option, setOption] = useState('');
+  const { selectedCountry, setSelectedCountry } = useContext(CountryContext);
 
-  const handleAmountChange = (event) => {
-    setAmount(event.target.value);
+
+  const handleCountryChange = (event) => {
+    try {
+      const selectedCountryInfo = JSON.parse(event.target.value);
+  
+      setSelectedCountry({
+        name: selectedCountryInfo.name,
+        lat: selectedCountryInfo.lat,
+        lng: selectedCountryInfo.lng
+      });
+    } catch (error) {
+      console.error(`Invalid JSON: ${event.target.value}`);
+    }
   };
+
+
+  console.log('selectedCountry.name:', selectedCountry.name); // ここでselectedCountryの値を確認
+  console.log('selectedCountry.lat:', selectedCountry.lat); // ここでselectedCountryの値を確認
+
+  useEffect(() => {
+    console.log(selectedCountry);
+  }, [selectedCountry]);
+
+  
   return (
     <div className="container">
-      <h1 className="text-5xl font-mono mt-20 ml-20">
+      <h1 className="text-4xl font-mono mt-20 ml-20">
         行き先は
         <span>
           <select
-            type="text"
-            value={amount}
-            onChange={handleAmountChange}
+            value={option}
+            onChange={e => setOption(e.target.value)}
             className="border-2 border-gray-300 rounded-md p-2 mx-5 mb-20 flex-grow text-center"
             placeholder="ランダム"
           >
@@ -28,23 +52,29 @@ const InputFormBudget = () => {
         </span>
         で決める！
       </h1>
-      <h1 className="text-8xl font-mono mt-20 mb-10 text-center">
+      <h1 className="text-7xl font-mono mt-10 mb-10 text-center">
         君の旅行先は！？
       </h1>
       <div className="ml-20 mb-10 flex justify-center">
-        <input
-          type="text"
-          value={amount}
-          onChange={handleAmountChange}
-          className="border-2 border-gray-200 text-5xl rounded-md p-2 mx-auto flex-grow text-center"
-          placeholder="ランダム"
-        />
+        
       </div>
-      <div className="ml-20 flex justify-center">
-        <div className="bg-amber-500 hover:bg-green-700 text-5xl text-white text-center px-10 py-5 mx-20 my-10 inline-block rounded-full">
-          <button>Start / Stop</button>
+      {option === 'ランダム' && <RandomDisplay />}
+      {option === '自分の運命は自分で決めるものだ' && (
+        <div className="ml-20 flex justify-center">
+          <div className="bg-amber-500 text-5xl text-black text-center px-10 py-5 mx-20 my-10 rounded-full flex justify-center items-center">
+            <select onChange={handleCountryChange} className="text-center">
+              {CountryList.map((country, index) => (
+                <option key={index} value={JSON.stringify(country)}>
+                  {country.name}
+                </option>
+              ))}
+          </select>
+          </div>
+          <div className="bg-amber-500 hover:bg-green-700 text-5xl text-black text-center px-10 py-5 mx-20 my-10 rounded-full flex justify-center items-center">
+            <Link  to="/result" className="ml-4" >決定</Link>
+          </div>
         </div>
-      </div>
+      )}
     </div>
   );
 };

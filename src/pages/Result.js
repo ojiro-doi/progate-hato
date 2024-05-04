@@ -1,18 +1,23 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
+import { CountryContext } from '../Context/CountryContext'; // CountryContextをインポート
 import Youtube from './Youtube';
-import { countryList } from '../components/CountryList';
-import CountryListSelect from '../components/CountryListSelect';
+import { countryList } from '../features/Search/CountryList';
+import CountryListSelect from '../features/Search/CountryListSelect';
 import axios from 'axios';
-import RandomDisplay from '../components/RouletteDisplay';
+import RandomDisplay from '../features/Search/RouletteDisplay';
 import Chat from '../features/Result/chat';
 import { PresWiki } from '../features/Result/PresWiki';
 import Map from '../features/Result/Map';  
+import { LoadScript } from '@react-google-maps/api';
 
 
 function Result() {
+  const {selectedCountry} = useContext(CountryContext);
+  console.log('result-selectedCountry.name:', selectedCountry.name); // ここでselectedCountryの値を確認
+
+  const center = { lat: selectedCountry.lat, lng: selectedCountry.lng };
 
   const [countryName, setCountryName] = useState('');
-  const [center, setCenter] = useState({ lat: 35.68, lng: 139.76 });
   const [videos, setVideos] = useState([]);
 
   // countryName が設定されるたびに自動で検索を行う
@@ -35,27 +40,31 @@ function Result() {
       });
   };
 
-  useEffect(() => {
-    const randomCountry = countryList[Math.floor(Math.random() * countryList.length)];
-    setCountryName(randomCountry.name);
-    setCenter({ lat: randomCountry.lat, lng: randomCountry.lng });
-  }, []); //初回レンダリング時のみ実行->空の配列を渡す
+  // useEffect(() => {
+  //   const randomCountry = countryList[Math.floor(Math.random() * countryList.length)];
+  //   setCountryName(randomCountry.name);
+  //   setCenter({ lat: randomCountry.lat, lng: randomCountry.lng });
+  // }, []); //初回レンダリング時のみ実行->空の配列を渡す
+
+  // console.log("redaer")
 
 
   return (
     <div className='p-5'>
       <div className='flex'>
         <div className='w-3/5'>
-        <CountryListSelect
-          countryName={countryName}
-          setCountryName={setCountryName}
-          setCenter={setCenter}
-          className="countrylistselect"
-        />
-        <h1 className=' text-5xl ml-4 mt-5 pb-3 border-b-2 border-black'>Map</h1>
-          <Map countryName={countryName} center={center} />
+          {/* <CountryListSelect
+            countryName={selectedCountry}
+            setCountryName={setCountryName}
+            setCenter={setCenter}
+            className="countrylistselect"
+          /> */}
+          <h1 className=' text-5xl ml-4 mt-5 pb-3 border-b-2 border-black'>Map</h1>
+          <LoadScript googleMapsApiKey={process.env.REACT_APP_GOOGLE_MAP_API_KEY}>
+            <Map countryName={selectedCountry.name} center={center} />
+          </LoadScript>
           <h1 className='text-5xl ml-4 mt-5 pb-3 border-b-2 border-black'>About</h1>
-          <PresWiki countryName={countryName}/>
+          <PresWiki countryName={selectedCountry.name}/>
         </div>
         <div className='w-2/5'>
           <h1 className='text-5xl ml-4 mt-5 text-left pb-3 border-b-2 border-black'>Youtube</h1>

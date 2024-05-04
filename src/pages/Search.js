@@ -2,7 +2,7 @@ import '../Tailwind.css';
 import Header from '../components/Header';
 import InputFormBudget from '../components/InputFormBudget';
 
-function Home() {
+function Search() {
 
   return (
     <div>
@@ -12,4 +12,4 @@ function Home() {
   );
 }
 
-export default Home;
+export default Search;

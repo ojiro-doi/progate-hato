@@ -1,6 +1,6 @@
 import React from 'react';
 import { memo } from 'react';
-import { countryList } from '../components/CountryList';
+import { countryList } from './CountryList';
 
 const CountryListSelect = memo(({ countryName, setCountryName, setCenter }) => {
 
