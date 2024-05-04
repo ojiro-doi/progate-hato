@@ -16,7 +16,7 @@ const Account = () => {
           type="text"
           value={amount}
           onChange={handleAmountChange}
-          className="border-2 border-gray-300 rounded-md p-2 my-2 flex-grow text-center"
+          className="border-2 border-gray-300 rounded-md p-2 mt-2 my-10 flex-grow text-center"
         >
           <option>¥100,000</option>
           <option>¥200,000</option>
@@ -33,7 +33,7 @@ const Account = () => {
           type="text"
           value={amount}
           onChange={handleAmountChange}
-          className="border-2 border-gray-300 rounded-md p-2 flex-grow
+          className="border-2 border-gray-300 rounded-md p-2 mt-2 mb-10 flex-grow
           text-center"
         >
           <option>1泊</option>
