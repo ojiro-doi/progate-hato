@@ -1,13 +1,15 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import Header from "../components/Header";
 import Youtube from './Youtube';
-import { countryList } from '../components/CountryList';
-import CountryListSelect from '../components/CountryListSelect';
+import { countryList } from '../features/Search/CountryList';
+import CountryListSelect from '../features/Search/CountryListSelect';
 import axios from 'axios';
-import RandomDisplay from '../components/RouletteDisplay';
+import RandomDisplay from '../features/Search/RouletteDisplay';
 import Chat from '../features/Result/chat';
 import { PresWiki } from '../features/Result/PresWiki';
-import Map from '../features/Result/Map';  
+import Map from '../features/Result/Map'; 
+import { LoadScript } from '@react-google-maps/api';
+import { CountryContext } from '../Context/CountryContext'; 
 
 
 function Result() {
@@ -72,7 +74,7 @@ function Result() {
             <h1 className="text-5xl ml-4 mt-20 pb-3 border-b-2 border-black">
               About
             </h1>
-            <PresWiki countryName={countryName} />
+            <PresWiki countryName={selectedCountry.name} />
           </div>
           <div className="w-2/5">
             <h1 className="text-5xl ml-4 mt-5 text-left pb-3 border-b-2 border-black">
