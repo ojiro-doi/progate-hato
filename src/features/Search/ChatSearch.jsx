@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState, useRef, useContext} from 'react';
+import React, { useCallback, useEffect, useState, useRef} from 'react';
 import { CountryContext } from '../../Context/CountryProvider';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
@@ -8,23 +8,25 @@ const API_URL = 'https://api.openai.com/v1/';
 const MODEL = 'gpt-4-turbo';
 
 const ChatSearch = () => {
+  const { selectedCountry,setSelectedCountry } = React.useContext(CountryContext);
+  console.log("ChatSearch-setSelectedCountry:", setSelectedCountry); // ここでselectedCountryの値を確認
   // メッセージの状態管理用のステート
   const [ message, setMessage ] = useState( '' );
   // 回答の状態管理用のステート
-  const [ answer, setAnswer ] = useState( '' );
+  const [ answer, setAnswer ] = useState(selectedCountry.name);
   // 会話の記録用のステート
   const [ conversation, setConversation ] = useState( [] );
   // ローディング表示用のステート
   const [ loading, setLoading ] = useState( false );
   // 前回のメッセージの保持、比較用
   const prevMessageRef = useRef( '' );
-  const { SelectedCountry, setSelectedCountry } = useContext(CountryContext);
 
   let flag = true;
 
 
   // 回答が取得されたとき
   useEffect( () => {
+    console.log("answerが変更");
     // 直前のチャット内容
     const newConversation = [
       {
@@ -48,6 +50,7 @@ const ChatSearch = () => {
     if (matchedCountry) {
       setSelectedCountry(matchedCountry);
     }else{
+      setSelectedCountry({ name: answer, lat: 0, lng: 0 });
       flag = false;
     }
 
@@ -60,7 +63,7 @@ const ChatSearch = () => {
   }, [ answer ] );
 
   function handleNextClick() {
-    if (flag == false) {
+    if (flag === false) {
       alert("マップ情報が得られませんでした");
     } 
   }
@@ -122,7 +125,7 @@ const ChatSearch = () => {
           <strong>あなた：</strong> {prevMessage}
         </div>
         <div style={{ marginBottom: '10px', padding: '10px', backgroundColor: '#fcf8e3', borderRadius: '5px' }}>
-          <strong>AI：</strong> {answer}
+          <strong>AI:</strong> {answer} 
         </div>
       </div>
     );

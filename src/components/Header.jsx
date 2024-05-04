@@ -28,6 +28,9 @@ const Header = () => {
                 flexDirection: "column",
                 alignItems: "center",
               }}
+              onClick={() => {
+                console.log("onClick_ホームnav_selectedCountry:", selectedCountry);
+              }}
             >
               <IoMdHome />
               <span style={{ marginTop: "4px" }}>HOME</span>
@@ -65,8 +68,7 @@ const Header = () => {
                 alignItems: "center",
               }}
               onClick={() => {
-                console.log("onClick_selectedCountry:", selectedCountry);
-                return setSelectedCountry(selectedCountry);
+                console.log("onClick_国名nav_selectedCountry:", selectedCountry);
               }}
             >
               <RiMapPin2Line />
