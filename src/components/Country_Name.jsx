@@ -4,7 +4,7 @@ import axios from 'axios';
 const API_URL = 'https://api.openai.com/v1/';
 const MODEL = 'gpt-4-turbo';
 
-const Chat = () => {
+const Country_Name = () => {
   // メッセージの状態管理用のステート
   const [ message, setMessage ] = useState( '' );
   // 回答の状態管理用のステート
@@ -22,7 +22,7 @@ const Chat = () => {
     const newConversation = [
       {
         'role': 'system',
-        'content': 'ジョジョの奇妙な冒険のキャラクター、ディオ・ブランドーとしてロールプレイを行ったうえで質問の内容に回答してください。「キャラクター設定」を参照して本物のディオとしてふるまってください。また有名なセリフを使用できる適切な箇所があった場合適切なセリフを選択して使用してください。無理に使用する必要はありません。また、敬語以外の質問は受け付けないようにしてください。',
+        'content': 'あなたは旅行会社のチャットbotです。ユーザーの質問の内容に合致する国の名前だけを答えてください',
       },
       {
         'role': 'user',
@@ -68,7 +68,7 @@ const Chat = () => {
         // HTTPヘッダー(認証)
         headers: {
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${XXXXX}`
+        'Authorization': `Bearer ${process.env.REACT_APP_CHATGPT_API_KEY}`
         }
       });
  
@@ -146,4 +146,4 @@ const Chat = () => {
   );
 }
  
-export default Chat;
+export default Country_Name;
