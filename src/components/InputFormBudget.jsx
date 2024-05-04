@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import piza from "../assets/piza.png";
 
 const InputFormBudget = () => {
   const [amount, setAmount] = useState("");

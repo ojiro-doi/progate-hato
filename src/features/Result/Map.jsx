@@ -13,7 +13,7 @@ const Map = ({countryName,center}) => {
     <LoadScript googleMapsApiKey={process.env.REACT_APP_GOOGLE_MAP_API_KEY}>
       <>
       {console.log('countryName', countryName)}
-        <p className='m-3 text-center text-4xl'><strong>国名：{countryName}</strong></p>
+        <p className='m-3 item-end pl-4 pt-5'><strong>国名：{countryName}</strong></p>
         <div className='border-2 border-blue-500 m-4'>
           <GoogleMap
             mapContainerStyle={containerStyle}

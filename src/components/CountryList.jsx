@@ -1,7 +1,7 @@
 
 export const countryList = [
   { name: '日本', lat: 35.68, lng: 139.76 },
-  { name: 'アメリカ', lat: 37.77, lng: -122.42 },
+  { name: 'アメリカ合衆国', lat: 37.77, lng: -122.42 },
   { name: 'オーストラリア', lat: -35.28, lng: 149.13 },
   { name: '中華人民共和国', lat: 39.91, lng: 116.39 },
   { name: 'インド', lat: 28.61, lng: 77.23 },
