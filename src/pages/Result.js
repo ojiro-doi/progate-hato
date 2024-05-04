@@ -3,10 +3,10 @@ import Youtube from './Youtube';
 import { countryList } from '../components/CountryList';
 import CountryListSelect from '../components/CountryListSelect';
 import axios from 'axios';
-import RandomDisplay from '../components/RandomDisplay';
-import Chat from '../components/chat';
-import { PresWiki } from '../components/PresWiki';
-import Map from '../components/Map';  
+import RandomDisplay from '../components/RouletteDisplay';
+import Chat from '../features/Result/chat';
+import { PresWiki } from '../features/Result/PresWiki';
+import Map from '../features/Result/Map';  
 
 
 function Result() {
