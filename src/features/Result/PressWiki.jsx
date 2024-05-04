@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
-export const PresWiki = ({ countryName }) => {
+export const PresWiki = ({ selectedCountry }) => {
   const [countryInfo, setCountryInfo] = useState('');
+  console.log('selectedCountry: ', selectedCountry);  
 
   useEffect(() => {
     const fetchCountryInfo = async () => {
@@ -14,7 +15,7 @@ export const PresWiki = ({ countryName }) => {
           explaintext: true,
           format: 'json',
           origin: '*',
-          titles: countryName
+          titles: selectedCountry
         }
       });
 
@@ -30,11 +31,11 @@ export const PresWiki = ({ countryName }) => {
     };
 
     fetchCountryInfo();
-  }, [countryName]);
+  }, [selectedCountry]);
 
   return (
     <div className="p-8">
-      <h1 className="block mt-1 text-lg leading-tight font-medium text-black">{countryName}</h1>
+      <h1 className="block mt-1 text-lg leading-tight font-medium text-black">{selectedCountry}</h1>
       <p className="mt-2 text-gray-500">{countryInfo}</p>
     </div>
   );
