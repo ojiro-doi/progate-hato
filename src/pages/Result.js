@@ -16,8 +16,9 @@ function Result() {
   const {selectedCountry} = useContext(CountryContext);
   console.log('result-selectedCountry.name:', selectedCountry.name); // ここでselectedCountryの値を確認
 
+  const center = { lat: selectedCountry.lat, lng: selectedCountry.lng };
+
   const [countryName, setCountryName] = useState('');
-  const [center, setCenter] = useState({ lat: 35.68, lng: 139.76 });
   const [videos, setVideos] = useState([]);
 
   // countryName が設定されるたびに自動で検索を行う
