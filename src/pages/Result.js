@@ -6,9 +6,6 @@ import CountryListSelect from '../features/Search/CountryListSelect';
 import axios from 'axios';
 import RandomDisplay from '../features/Search/RouletteDisplay';
 import Chat from '../features/Result/chat';
-
-
-
 import { PresWiki } from '../features/Result/PressWiki';
 import Map from '../features/Result/Map'; 
 import { LoadScript } from '@react-google-maps/api';
@@ -61,15 +58,12 @@ function Result() {
     <div>
       <Header />
       <div className="p-5">
-<<<<<<< HEAD
-        <div className="flex flex-col md:flex-row mt-5">
-          <div className="md:w-3/5">
-            <h1 className="text-5xl ml-4 mt-5 pb-3 border-b-2 border-black">
-=======
+
+
         <div className="flex mt-5">
           <div className="w-3/5">
             <h1 className=" text-5xl ml-4 mt-5 pb-3 border-b-2 border-black">
->>>>>>> dev
+
               Map
             </h1>
               <Map selectedCountry={selectedCountry.name} center={center} />
