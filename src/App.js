@@ -1,7 +1,7 @@
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import Home from './pages/Home';
-import Result from './pages/Result';
-import Youtube from './pages/Youtube';
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import Home from "./pages/Home";
+import Result from "./pages/Result";
+import AccountPage from "./pages/Account";
 
 function App() {
   return (
@@ -9,6 +9,7 @@ function App() {
       <Routes>
         <Route path={`/`} element={<Home />} />
         <Route path={`/Result`} element={<Result />} />
+        <Route path={`/Account`} element={<AccountPage />} />
       </Routes>
     </BrowserRouter>
   );

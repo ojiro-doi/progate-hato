@@ -44,9 +44,14 @@ function Result() {
 
   return (
     <div className='p-5'>
-      <RandomDisplay countryName={countryName} setCountryName={setCountryName} setCenter={setCenter}/>
       <div className='flex'>
         <div className='w-3/5'>
+        <CountryListSelect
+          countryName={countryName}
+          setCountryName={setCountryName}
+          setCenter={setCenter}
+          className="countrylistselect"
+        />
         <h1 className=' text-5xl ml-4 mt-5 pb-3 border-b-2 border-black'>Map</h1>
           <Map countryName={countryName} center={center} />
           <h1 className='text-5xl ml-4 mt-5 pb-3 border-b-2 border-black'>About</h1>
