@@ -1,13 +1,13 @@
-import React from "react";
-import { GoogleMap, Marker, LoadScript } from "@react-google-maps/api";
+import React, { memo } from "react";
+import { GoogleMap, LoadScript, MarkerF } from "@react-google-maps/api";
 
 const containerStyle = {
   height: "80vh",
   width: "100%",
 };
 
-const Map = ({ selectedCountry, center }) => {
-
+const Map = memo(({ selectedCountry, center }) => {
+  console.log("map表示");
   return (
     <>
       {/* {console.log('countryName', countryName)} */}
@@ -15,18 +15,40 @@ const Map = ({ selectedCountry, center }) => {
         <strong>国名：{selectedCountry}</strong>
       </p>
       <div className="border-2 border-blue-500 m-4">
-        <LoadScript googleMapsApiKey={process.env.REACT_APP_GOOGLE_MAP_API_KEY}>
+        {window.google === undefined ? (
+          <LoadScript
+            googleMapsApiKey={process.env.REACT_APP_GOOGLE_MAP_API_KEY}
+          >
+            <GoogleMap
+              mapContainerStyle={containerStyle}
+              center={center}
+              zoom={10}
+            >
+              <MarkerF position={center} />
+            </GoogleMap>
+          </LoadScript>
+        ) : (
           <GoogleMap
             mapContainerStyle={containerStyle}
             center={center}
             zoom={10}
           >
-            <Marker position={center} />
+            <MarkerF position={center} />
           </GoogleMap>
-        </LoadScript>
+        )}
+
+        {/* <LoadScript googleMapsApiKey={process.env.REACT_APP_GOOGLE_MAP_API_KEY}>
+          <GoogleMap
+            mapContainerStyle={containerStyle}
+            center={center}
+            zoom={10}
+          >
+            <MarkerF position={center} />
+          </GoogleMap>
+        </LoadScript> */}
       </div>
     </>
   );
-};
+});
 
 export default Map;
