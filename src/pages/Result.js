@@ -1,13 +1,3 @@
-<<<<<<< HEAD
-import React, { useState, useEffect } from 'react';
-import Youtube from './Youtube';
-import { countryList } from '../components/CountryList';
-import CountryListSelect from '../components/CountryListSelect';
-import axios from 'axios';
-import Chat from './chat';
-import { PresWiki } from '../components/PresWiki';
-import Map from '../components/Map';  
-=======
 import React, { useState, useEffect } from "react";
 import Youtube from "./Youtube";
 import { countryList } from "../components/CountryList";
@@ -15,7 +5,7 @@ import CountryListSelect from "../components/CountryListSelect";
 import axios from "axios";
 import { PresWiki } from "../components/PresWiki";
 import Map from "../components/Map";
->>>>>>> c7cb425 (account page)
+
 
 
 function Result() {
@@ -55,14 +45,10 @@ function Result() {
   }, []); //初回レンダリング時のみ実行->空の配列を渡す
 
   return (
-<<<<<<< HEAD
-    <div>
-      <CountryListSelect countryName={countryName} setCountryName={setCountryName} setCenter={setCenter}/>
-      <Map countryName={countryName} center={center} />
-      <PresWiki countryName={countryName}/>
-      <Youtube videos={videos}/>
-      <Chat/>
-=======
+
+    
+
+
     <div className="compornents">
       <CountryListSelect
         countryName={countryName}
@@ -77,7 +63,6 @@ function Result() {
       />
       <Youtube videos={videos} className="youtube flex w-1/2" />
       <PresWiki countryName={countryName} className="prewiki" />
->>>>>>> c7cb425 (account page)
     </div>
   );
 }
