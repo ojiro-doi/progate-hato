@@ -13,6 +13,9 @@ export const countryList = [
   { name: 'カナダ', lat: 45.42, lng: -75.7 },
   { name: 'ロシア', lat: 55.75, lng: 37.62 },
   { name: 'ブラジル', lat: -15.78, lng: -47.93 },
+  { name: 'メキシコ', lat: 19.43, lng: -99.13 },
+  { name: '韓国', lat: 37.56, lng: 126.97 },
+  { name: 'ノルウェー', lat: 59.91, lng: 10.75 },
 ]; 
 
 export default countryList;

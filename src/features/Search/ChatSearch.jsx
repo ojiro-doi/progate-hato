@@ -2,6 +2,7 @@ import React, { useCallback, useEffect, useState, useRef, useContext} from 'reac
 import { CountryContext } from '../../Context/CountryProvider';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import countryList from './CountryList';
 
 const API_URL = 'https://api.openai.com/v1/';
 const MODEL = 'gpt-4-turbo';
@@ -19,13 +20,16 @@ const ChatSearch = () => {
   const prevMessageRef = useRef( '' );
   const { SelectedCountry, setSelectedCountry } = useContext(CountryContext);
 
+  let flag = true;
+
+
   // 回答が取得されたとき
   useEffect( () => {
     // 直前のチャット内容
     const newConversation = [
       {
         'role': 'system',
-        'content': 'あなたは旅行会社のチャットbotです。ユーザーの質問の内容に合致する国の名前だけを答えてください',
+        'content': 'あなたは旅行会社のチャットbotで、日本、アメリカ合衆国、オーストラリア、中華人民共和国、インド、イギリス、フランス、ドイツ、イタリア、ブラジル、カナダ、ロシア、ブラジル、メキシコ、韓国、ノルウェーのどれか国名だけを返してください',
       },
       {
         'role': 'user',
@@ -40,37 +44,12 @@ const ChatSearch = () => {
       lng: 0
     });
 
-    const axios = require('axios');
-
-  async function getCountryLatLng(countryName) {
-    const response = await axios.get(`http://api.geonames.org/searchJSON?name=${countryName}&maxRows=1&username=demo`);
-
-    if (response.data.geonames && response.data.geonames.length > 0) {
-      const { lat, lng } = response.data.geonames[0];
-      return { lat, lng };
-    } else {
-      throw new Error('Country not found');
+    const matchedCountry = countryList.find(country => country.name === answer);
+    if (matchedCountry) {
+      setSelectedCountry(matchedCountry);
+    }else{
+      flag = false;
     }
-  }
-
-  if (answer) {
-    getCountryLatLng(answer)
-      .then(({ lat, lng }) => {
-        setSelectedCountry({
-          name: answer,
-          lat: lat,
-          lng: lng
-        });
-      })
-      .catch(console.error);
-  }
-
-  getCountryLatLng("Japan")
-    .then(({ lat, lng }) => {
-      console.log(`Japan: ${lat}, ${lng}`);
-    })
-    .catch(console.error);
-    
 
  
     // 会話の記録(直前のチャット内容の追加)
@@ -79,6 +58,12 @@ const ChatSearch = () => {
     // メッセージの消去(フォームのクリア)
     setMessage( '' );
   }, [ answer ] );
+
+  function handleNextClick() {
+    if (flag == false) {
+      alert("マップ情報が得られませんでした");
+    } 
+  }
  
   // フォーム送信時の処理
   const handleSubmit = useCallback( async ( event ) => {
@@ -165,7 +150,7 @@ const ChatSearch = () => {
             送信
           </button>
           <div className='p-3'>
-            <Link to="/result" className='text-blue-500 bg-sky-950'>NEXT</Link>
+            <Link to="/result" className='text-blue-500 bg-sky-950' onClick={handleNextClick}>NEXT</Link>
           </div>
         </div>
       </form>
