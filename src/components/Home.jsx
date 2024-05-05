@@ -8,7 +8,9 @@ const Home = () => {
   };
   return (
     <div>
-      <h1 className="text-5xl">さあ、旅先を探してみよう！</h1>
+      <h1 className="flex justify-center mt-20 mb-20 text-5xl">
+        さあ、旅先を探してみよう！
+      </h1>
     </div>
   );
 };
