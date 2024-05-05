@@ -1,21 +1,23 @@
 import React, { useState, useEffect, useContext } from "react";
 import Header from "../components/Header";
 import Youtube from "./Youtube";
-import { countryList } from "../features/Search/CountryList";
-import CountryListSelect from "../features/Search/CountryListSelect";
 import axios from "axios";
-import RandomDisplay from "../features/Search/RouletteDisplay";
 import Chat from "../features/Result/chat";
 import { PresWiki } from "../features/Result/PressWiki";
 import Map from "../features/Result/Map";
+import ChatAboutTrip from "../features/Result/ChatAboutTrip";
 import { CountryContext } from "../Context/CountryProvider";
+import { ValuesContext } from "../Context/ValuesProvider";
 
 function Result() {
   const { selectedCountry, setSelectedCountry } = useContext(CountryContext);
-  console.log("result-selectedCountry.name:", selectedCountry.name); // ここでselectedCountryの値を確認
-
   const center = { lat: selectedCountry.lat, lng: selectedCountry.lng };
   const [videos, setVideos] = useState([]);
+
+  const {values, setValues} = useContext(ValuesContext);
+
+  console.log("values amount: ", values.amount);
+  console.log("values days: ", values.days);
 
   useEffect(() => {
     console.log("selectedCountryが変更");
@@ -61,6 +63,10 @@ function Result() {
             <div>
               <h1 className="text-5xl ml-4 mt-5 text-left pb-3 border-b-2 border-black">チャット欄</h1>
               <Chat />
+            </div>
+            <div>
+              <h1 className="text-5xl ml-4 mt-5 text-left pb-3 border-b-2 border-black">旅行プラン</h1>
+              <ChatAboutTrip />
             </div>
           </div>
   
