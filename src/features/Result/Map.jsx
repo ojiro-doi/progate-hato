@@ -31,7 +31,7 @@ const Map = memo(({ selectedCountry, center }) => {
           <GoogleMap
             mapContainerStyle={containerStyle}
             center={center}
-            zoom={10}
+            zoom={5}
           >
             <MarkerF position={center} />
           </GoogleMap>
