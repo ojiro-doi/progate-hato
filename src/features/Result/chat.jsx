@@ -115,9 +115,9 @@ const Chat = () => {
   <div className='container mx-auto px-4 pt-5'>
   <form className='space-y-4' onSubmit={handleSubmit}>
     <label>
-    <p className='mb-2 text-red-600'>ディオ様に質問できます。丁寧な言葉ではないと回答して頂けません。</p>
+    <p className='mb-2 text-black'>旅行先の国についてDIO様に聞いてみよう！ただし丁寧な言葉でないと回答してくれないかも...</p>
       <textarea
-        className='w-full p-2 border  border-amber-600 rounded-md'
+        className='w-full p-2 border  border-black rounded-md'
         rows='5'
         value={message}
         onChange={e => {
