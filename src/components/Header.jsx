@@ -1,6 +1,7 @@
 import React, { useState, useCallback } from "react";
 import { Link } from "react-router-dom";
-import logo from "../assets/logo.png";
+// import logo from "../assets/logo.png";
+import logo_TripDoUp from "../assets/logo_TripDoU.png";
 import { IconContext } from "react-icons";
 import { IoMdHome } from "react-icons/io"; //Homeアイコン
 import { MdAccountCircle } from "react-icons/md"; //Accountアイコン
@@ -19,7 +20,7 @@ const Header = () => {
   return (
     <header className="px-5 pt-5 w-full relative">
       <div className="container flex mx-auto flex-row h-16 shadow-2xl rounded-full justify-between">
-        <img src={logo} alt="ロゴの名前" className="object-contain pl-6 py-2" />
+        <img src={logo_TripDoUp} alt="ロゴ" className="object-contain pl-6 py-2" />
         <div className="hidden md:flex">
           <IconContext.Provider value={{ color: "#000000", size: "24" }}>
             <Link
