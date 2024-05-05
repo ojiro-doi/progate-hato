@@ -58,7 +58,12 @@ function Result() {
               About
             </h1>
             <PresWiki selectedCountry={selectedCountry.name} />
+            <div>
+              <h1 className="text-5xl ml-4 mt-5 text-left pb-3 border-b-2 border-black">チャット欄</h1>
+              <Chat />
+            </div>
           </div>
+  
           <div className="md:w-3/5">
             <h1 className="text-5xl ml-4 mt-5 text-left pb-3 border-b-2 border-black">
               Youtube
@@ -68,7 +73,7 @@ function Result() {
             </div>
           </div>
         </div>
-        <Chat />
+
       </div>
     </div>
   );

@@ -90,60 +90,58 @@ const Chat = () => {
   // チャット内容
   const ChatContent = React.memo( ( { prevMessage, answer } ) => {
     return (
-      <div className='result'>
-        <div className='current-message'>
-          <h2>質問:</h2>
-          <p>{ prevMessage }</p>
-        </div>
-        <div className='current-answer'>
-          <h2>回答:</h2>
-          <p>{ answer.split( /\n/ )
-                .map( ( item, index ) => {
-                  return (
-                    <React.Fragment key={ index }>
-                      { item }
-                      <br />
-                    </React.Fragment>
-                  );
-                } )
-              }
-          </p>
-        </div>
-      </div>
+<div className='space-y-6 pt-5'>
+  <div className='p-6 bg-blue-500 text-white rounded-lg shadow-md'>
+    <h2 className='font-bold text-2xl mb-4'>質問:</h2>
+    <p className='text-lg'>{prevMessage}</p>
+  </div>
+  <div className='p-6 bg-white rounded-lg shadow-md'>
+    <h2 className='font-bold text-2xl mb-4'>回答:</h2>
+    <p className='text-lg'>
+      {answer.split(/\n/).map((item, index) => (
+        <React.Fragment key={index}>
+          {item}
+          <br />
+        </React.Fragment>
+      ))}
+    </p>
+  </div>
+</div>
     )
   } );
  
   // フォームの表示
   return (
-    <div className='container'>
-      <form className='chat-form' onSubmit={ handleSubmit }>
-        <label>
-          <textarea
-            className='message'
-            rows='5'
-            cols='50'
-            value={ message }
-            onChange={ e => {
-              setMessage( e.target.value ) ;
-            } }
-          />
-        </label>
-        <div className='submit'>
-          <button type="submit">質問する</button>
-        </div>
-      </form>
-      { loading && (
-        <div className='loading'>
-          <p>回答中...</p>
-        </div>
-      ) }
-      { answer && !loading && (
-        <ChatContent
-          prevMessage={ prevMessageRef.current }
-          answer={ answer }
-        />
-      ) }
+  <div className='container mx-auto px-4 pt-5'>
+  <form className='space-y-4' onSubmit={handleSubmit}>
+    <label>
+    <p className='mb-2 text-red-600'>ディオ様に質問できます。丁寧な言葉ではないと回答して頂けません。</p>
+      <textarea
+        className='w-full p-2 border  border-amber-600 rounded-md'
+        rows='5'
+        value={message}
+        onChange={e => {
+          setMessage(e.target.value);
+        }}
+      />
+    </label>
+    <div>
+      <button type="submit" className='px-4 py-2 bg-blue-500 text-white rounded-md'>質問する</button>
     </div>
+  </form>
+  {loading && (
+    <div className='mt-4'>
+      <p className='text-lg text-blue-500'>回答中...</p>
+    </div>
+  )}
+  {answer && !loading && (
+    <ChatContent
+      prevMessage={prevMessageRef.current}
+      answer={answer}
+      className='mt-4'
+    />
+  )}
+</div>
   );
 }
  
