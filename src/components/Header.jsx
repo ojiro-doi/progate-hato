@@ -21,7 +21,7 @@ const Header = () => {
     <header className="px-5 pt-5 w-full relative">
       <div className="container flex mx-auto flex-row h-16 shadow-2xl rounded-full justify-between">
         <img src={logo_TripDoUp} alt="ロゴ" className="object-contain pl-6 py-2" />
-        <div className="hidden md:flex">
+        <div className="hidden md:flex font-bold">
           <IconContext.Provider value={{ color: "#000000", size: "24" }}>
             <Link
               to="/"
@@ -85,11 +85,11 @@ const Header = () => {
       {isOpen && (
         <div
           className="fixed inset-0 bg-black bg-opacity-70 z-40 "
-          // onClick={toggleMenu}
+          onClick={toggleMenu}
         >
           <button
             onClick={toggleMenu}
-            className="text-white focus:outline-none absolute top-0 right-0 m-4"
+            className="text-white focus:outline-none top-0 right-0 m-4 absolute "
           >
             <FaTimes size={32} style={{color:'white'}}/>
           </button>
