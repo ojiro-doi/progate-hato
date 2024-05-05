@@ -49,7 +49,7 @@ function Result() {
   return (
     <div>
       <Header />
-      <div className="p-5">
+      <div className="p-5 font-bold">
         <div className="flex flex-col lg:flex-row mt-5 justify-center">
           <div className="md:w-3/5">
             <h1 className="text-5xl ml-4 mt-5 pb-3 border-b-2 border-black">

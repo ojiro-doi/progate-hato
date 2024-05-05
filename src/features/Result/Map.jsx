@@ -12,7 +12,7 @@ const Map = memo(({ selectedCountry, center }) => {
     <>
       {/* {console.log('countryName', countryName)} */}
       <p className="m-3 item-end pl-4 pt-5">
-        <strong>国名：{selectedCountry}</strong>
+        <strong><span className="font-bold text-3xl">{selectedCountry}</span></strong>
       </p>
       <div className="border-2 border-blue-500 m-4">
         {window.google === undefined ? (
