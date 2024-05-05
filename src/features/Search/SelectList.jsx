@@ -5,25 +5,35 @@ import { CountryContext } from "../../Context/CountryProvider";
 
 const SelectList = () => {
   const { setSelectedCountry } = React.useContext(CountryContext);
-  const [selectedCountryInfo, setSelectedCountryInfo] = React.useState(null);
+  // const [selectedCountryInfo, setSelectedCountryInfo] = React.useState(null);
 
   const handleCountryChange = (event) => {
     try {
       const countryInfo = JSON.parse(event.target.value);
-      setSelectedCountryInfo(countryInfo);
+      console.log("countryInfo: ", countryInfo);
+      setSelectedCountry({
+        name: countryInfo.name,
+        lat: countryInfo.lat,
+        lng: countryInfo.lng,
+      });
+      // setSelectedCountryInfo(countryInfo);
+      // console.log("selectedCountryInfo: ", selectedCountryInfo);
     } catch (error) {
       console.error(`Invalid JSON: ${event.target.value}`);
     }
   };
-  const handleButtonClick = () => {
-    if (selectedCountryInfo) {
-      setSelectedCountry({
-        name: selectedCountryInfo.name,
-        lat: selectedCountryInfo.lat,
-        lng: selectedCountryInfo.lng,
-      });
-    }
-  };
+
+  // const handleButtonClick = () => {
+  //   if (selectedCountryInfo) {
+  //     setSelectedCountry({
+  //       name: selectedCountryInfo.name,
+  //       lat: selectedCountryInfo.lat,
+  //       lng: selectedCountryInfo.lng,
+  //     });
+  //   }
+  // };
+
+  
 
   return (
     <div>
@@ -42,8 +52,8 @@ const SelectList = () => {
         </div>
       </div>
       <div className="flex justify-center">
-        <button className="h-20 w-50 px-6 m-2 bg-gradient-to-r from-amber-300 via-amber-400 to-amber-500 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-amber-300 dark:focus:ring-amber-800 shadow-lg shadow-amber-500/50 dark:shadow-lg dark:shadow-blue-800/80 font-medium rounded-full text-lg text-sm text-emerald-950 md:font-bold px-5 py-2.5 text-center me-2 mb-2">
-          <Link to="/result">　　　　決定　　　　</Link>
+        <button className="h-20 w-50 p-12 m-2 bg-gradient-to-r from-amber-300 via-amber-400 to-amber-500 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-amber-300 dark:focus:ring-amber-800 shadow-lg shadow-amber-500/50 dark:shadow-lg dark:shadow-blue-800/80 font-medium rounded-full text-lg text-sm text-emerald-950 md:font-bold px-5 py-2.5 text-center me-2 mb-2">
+          <Link to="/Result"><span className="p-10">決定</span></Link>
         </button>
       </div>
     </div>
