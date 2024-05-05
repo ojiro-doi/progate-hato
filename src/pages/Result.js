@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import Header from "../components/Header";
-import Youtube from "./Youtube";
+import Youtube from "../features/Result/Youtube";
 import axios from "axios";
 import Chat from "../features/Result/chat";
 import { PresWiki } from "../features/Result/PressWiki";
@@ -33,7 +33,7 @@ function Result() {
   const onSearchYoutube = (searchQuery) => {
     const url = `https://www.googleapis.com/youtube/v3/search?type=video&part=snippet&q=${encodeURIComponent(
       searchQuery
-    )}&maxResults=5&key=${process.env.REACT_APP_YOUTUBE_API_KEY}`;
+    )}&maxResults=3&key=${process.env.REACT_APP_YOUTUBE_API_KEY}`;//&maxResults={ここに表示する個数}&key=
 
     axios
       .get(url)
@@ -84,6 +84,7 @@ function Result() {
             </h1>
             <div className="flex justify-center">
               <Youtube videos={videos} className="" />
+              {console.log("videos: ", videos)}
             </div>
           </div>
         </div>
