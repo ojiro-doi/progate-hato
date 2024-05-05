@@ -127,6 +127,7 @@ const Chat = () => {
     </label>
     <div>
       <button type="submit" className='px-4 py-2 bg-blue-500 text-white rounded-md'>質問する</button>
+      <p className='pt-2 text-red-700'>下記に表示↓</p>
     </div>
   </form>
   {loading && (
