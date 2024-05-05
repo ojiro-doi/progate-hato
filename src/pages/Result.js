@@ -48,23 +48,23 @@ function Result() {
     <div>
       <Header />
       <div className="p-5">
-        <div className="flex flex-col md:flex-row mt-5">
+        <div className="flex flex-col lg:flex-row mt-5 justify-center">
           <div className="md:w-3/5">
             <h1 className="text-5xl ml-4 mt-5 pb-3 border-b-2 border-black">
               Map
             </h1>
-              <Map selectedCountry={selectedCountry.name} center={center} />
+              <Map selectedCountry={selectedCountry.name} center={center} className=""/>
             <h1 className="text-5xl ml-4 mt-20 pb-3 border-b-2 border-black">
               About
             </h1>
             <PresWiki selectedCountry={selectedCountry.name} />
           </div>
-          <div className="md:w-2/5">
+          <div className="md:w-3/5">
             <h1 className="text-5xl ml-4 mt-5 text-left pb-3 border-b-2 border-black">
               Youtube
             </h1>
-            <div className="flex justify-center">
-              <Youtube videos={videos} />
+            <div className="flex justify-right">
+              <Youtube videos={videos} className=""/>
             </div>
           </div>
         </div>
