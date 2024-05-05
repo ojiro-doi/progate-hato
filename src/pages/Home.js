@@ -1,15 +1,16 @@
-import '../Tailwind.css';
-import Header from '../components/Header';
-import InputFormBudget from '../features/Search/InputFormBudget';
+import "../Tailwind.css";
+import Header from "../components/Header";
+import Home from "../components/Home";
+import LoginForm from "../components/Login";
 
-function Home() {
-
+function HomePage() {
   return (
     <div>
-      <Header/>
-      <InputFormBudget/>
+      <Header />
+      <Home />
+      <LoginForm />
     </div>
   );
 }
 
-export default Home;
+export default HomePage;
