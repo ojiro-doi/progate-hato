@@ -1,6 +1,5 @@
 import React, { createContext,useState } from 'react';
 import CountryList from "../features/Search/CountryList";
-// import { CountryContext } from './CountryContext';
 
 export const CountryContext = createContext({
   selectedCountry: { name: '' }, // デフォルト値を設定

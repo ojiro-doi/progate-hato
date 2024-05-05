@@ -10,7 +10,6 @@ const MODEL = "gpt-4-turbo";
 const ChatSearch = () => {
   const { selectedCountry, setSelectedCountry } =
     React.useContext(CountryContext);
-  console.log("ChatSearch-setSelectedCountry:", setSelectedCountry); // ここでselectedCountryの値を確認
   // メッセージの状態管理用のステート
   const [message, setMessage] = useState("");
   // 回答の状態管理用のステート
