@@ -5,10 +5,12 @@ import Result from "./pages/Result";
 import AccountPage from "./pages/Account";
 import Notfound from "./pages/Notfound";
 import { CountryProvider } from "./Context/CountryProvider";
+import { ValuesProvider } from "./Context/ValuesProvider";
 
 function App() {
   return (
-    <CountryProvider>
+    <ValuesProvider>
+      <CountryProvider>
       <BrowserRouter>
         <Routes>
           <Route path={`/`} element={<Home />} />
@@ -18,7 +20,8 @@ function App() {
           <Route path={`*`} element={<Notfound />} />
         </Routes>
       </BrowserRouter>
-    </CountryProvider>
+      </CountryProvider>
+    </ValuesProvider>
   );
 }
 

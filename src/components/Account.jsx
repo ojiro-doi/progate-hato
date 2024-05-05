@@ -1,11 +1,34 @@
-import React, { useState } from "react";
+import React, { useContext } from 'react';
+import { ValuesContext } from "../Context/ValuesProvider";
 
 const Account = () => {
-  const [amount, setAmount] = useState("");
+  // useContext からオブジェクトをそのまま受け取る
+  const context = useContext(ValuesContext);
+  
+  // 分割代入を使用して values と setValues を取り出す
+  const { values, setValues } = context;
 
   const handleAmountChange = (event) => {
-    setAmount(event.target.value);
+    setValues(prevValues => ({
+      ...prevValues,
+      amount: event.target.value
+    }));
   };
+
+  const handleDaysChange = (event) => {
+    setValues(prevValues => ({
+      ...prevValues,
+      days: event.target.value
+    }));
+  };
+
+  const handlePeopleChange = (event) => {
+    setValues(prevValues => ({
+      ...prevValues,
+      people: event.target.value
+    }));
+  };
+
   return (
     <div className="account_compornents">
       <div className="account_input w-1/2 mt-20 ml-20 my-5">
@@ -13,8 +36,8 @@ const Account = () => {
           予算
         </h1>
         <select
-          type="text"
-          value={amount}
+          name="amount"
+          value={values.amount}
           onChange={handleAmountChange}
           className="border-2 border-gray-300 rounded-md p-2 mt-2 my-10 flex-grow text-center"
         >
@@ -30,11 +53,10 @@ const Account = () => {
           宿泊日数
         </h1>
         <select
-          type="text"
-          value={amount}
-          onChange={handleAmountChange}
-          className="border-2 border-gray-300 rounded-md p-2 mt-2 mb-10 flex-grow
-          text-center"
+          name="days"
+          value={values.days}
+          onChange={handleDaysChange}
+          className="border-2 border-gray-300 rounded-md p-2 mt-2 mb-10 flex-grow text-center"
         >
           <option>1泊</option>
           <option>2泊</option>
@@ -48,9 +70,9 @@ const Account = () => {
           人数
         </h1>
         <select
-          type="text"
-          value={amount}
-          onChange={handleAmountChange}
+          name="people"
+          value={values.people}
+          onChange={handlePeopleChange}
           className="border-2 border-gray-300 rounded-md p-2 flex-grow text-center"
         >
           <option>1人</option>
