@@ -1,6 +1,7 @@
 import React, { useState, useCallback } from "react";
 import { Link } from "react-router-dom";
-import logo from "../assets/logo.png";
+// import logo from "../assets/logo.png";
+import logo_TripDoUp from "../assets/logo_TripDoU.png";
 import { IconContext } from "react-icons";
 import { IoMdHome } from "react-icons/io"; //Homeアイコン
 import { MdAccountCircle } from "react-icons/md"; //Accountアイコン
@@ -19,8 +20,8 @@ const Header = () => {
   return (
     <header className="px-5 pt-5 w-full relative">
       <div className="container flex mx-auto flex-row h-16 shadow-2xl rounded-full justify-between">
-        <img src={logo} alt="ロゴの名前" className="object-contain pl-6 py-2" />
-        <div className="hidden md:flex">
+        <img src={logo_TripDoUp} alt="ロゴ" className="object-contain pl-6 py-2" />
+        <div className="hidden md:flex font-bold">
           <IconContext.Provider value={{ color: "#000000", size: "24" }}>
             <Link
               to="/"
@@ -84,11 +85,11 @@ const Header = () => {
       {isOpen && (
         <div
           className="fixed inset-0 bg-black bg-opacity-70 z-40 "
-          // onClick={toggleMenu}
+          onClick={toggleMenu}
         >
           <button
             onClick={toggleMenu}
-            className="text-white focus:outline-none absolute top-0 right-0 m-4"
+            className="text-white focus:outline-none top-0 right-0 m-4 absolute "
           >
             <FaTimes size={32} style={{color:'white'}}/>
           </button>

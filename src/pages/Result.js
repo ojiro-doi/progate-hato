@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import Header from "../components/Header";
-import Youtube from "./Youtube";
+import Youtube from "../features/Result/Youtube";
 import axios from "axios";
 import Chat from "../features/Result/chat";
 import { PresWiki } from "../features/Result/PressWiki";
@@ -14,7 +14,7 @@ function Result() {
   const center = { lat: selectedCountry.lat, lng: selectedCountry.lng };
   const [videos, setVideos] = useState([]);
 
-  const {values, setValues} = useContext(ValuesContext);
+  const { values, setValues } = useContext(ValuesContext);
 
   console.log("values amount: ", values.amount);
   console.log("values days: ", values.days);
@@ -33,7 +33,7 @@ function Result() {
   const onSearchYoutube = (searchQuery) => {
     const url = `https://www.googleapis.com/youtube/v3/search?type=video&part=snippet&q=${encodeURIComponent(
       searchQuery
-    )}&maxResults=5&key=${process.env.REACT_APP_YOUTUBE_API_KEY}`;
+    )}&maxResults=3&key=${process.env.REACT_APP_YOUTUBE_API_KEY}`;//&maxResults={ここに表示する個数}&key=
 
     axios
       .get(url)
@@ -49,37 +49,45 @@ function Result() {
   return (
     <div>
       <Header />
-      <div className="p-5">
+      <div className="p-5 font-bold">
         <div className="flex flex-col lg:flex-row mt-5 justify-center">
           <div className="md:w-3/5">
             <h1 className="text-5xl ml-4 mt-5 pb-3 border-b-2 border-black">
               Map
             </h1>
-              <Map selectedCountry={selectedCountry.name} center={center} className=""/>
+            <Map
+              selectedCountry={selectedCountry.name}
+              center={center}
+              className=""
+            />
             <h1 className="text-5xl ml-4 mt-20 pb-3 border-b-2 border-black">
               About
             </h1>
             <PresWiki selectedCountry={selectedCountry.name} />
             <div>
-              <h1 className="text-5xl ml-4 mt-5 text-left pb-3 border-b-2 border-black">チャット欄</h1>
+              <h1 className="text-5xl ml-4 mt-5 text-left pb-3 border-b-2 border-black">
+                チャット欄
+              </h1>
               <Chat />
             </div>
             <div>
-              <h1 className="text-5xl ml-4 mt-5 text-left pb-3 border-b-2 border-black">旅行プラン</h1>
+              <h1 className="text-5xl ml-4 mt-5 text-left pb-3 border-b-2 border-black">
+                旅行プラン
+              </h1>
               <ChatAboutTrip />
             </div>
           </div>
-  
+
           <div className="md:w-3/5">
             <h1 className="text-5xl ml-4 mt-5 text-left pb-3 border-b-2 border-black">
               Youtube
             </h1>
-            <div className="flex justify-right">
-              <Youtube videos={videos} className=""/>
+            <div className="flex justify-center">
+              <Youtube videos={videos} className="" />
+              {console.log("videos: ", videos)}
             </div>
           </div>
         </div>
-
       </div>
     </div>
   );
