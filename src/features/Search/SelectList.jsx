@@ -41,10 +41,12 @@ const SelectList = () => {
           </select>
         </div>
       </div>
-      <div className="h-20 w-50 px-6 m-2 text-lg text-indigo-100 text-black bg-gradient-to-r from-amber-300 via-amber-400 to-amber-500 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-amber-300 dark:focus:ring-amber-800 shadow-lg shadow-amber-500/50 dark:shadow-lg dark:shadow-blue-800/80 font-medium rounded-full text-lg text-sm text-emerald-950 md:font-bold px-5 py-2.5 text-center me-2 mb-2">
-        <Link to="/result" className="ml-4" onClick={handleButtonClick}>
-          決定
-        </Link>
+      <div className="button_OK flex justify-center">
+        <button className="h-20 w-50 px-6 m-2 bg-gradient-to-r from-amber-300 via-amber-400 to-amber-500 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-amber-300 dark:focus:ring-amber-800 shadow-lg shadow-amber-500/50 dark:shadow-lg dark:shadow-blue-800/80 font-medium rounded-full text-lg text-sm text-emerald-950 md:font-bold px-5 py-2.5 text-center me-2 mb-2">
+          <Link to="/result" className="ml-4" onClick={handleButtonClick}>
+            　　　決定　　　　
+          </Link>
+        </button>
       </div>
     </div>
   );
