@@ -1,4 +1,24 @@
-# Getting Started with Create React App
+# 旅行先検索サイト
+
+海外旅行先をランダム、リスト、チャットによる三つの方法で選択してくれるサイトです。国が選択されるとその場所のグーグルマップが表示され、Youtubeの表示、ChatGPTに質問ができます。
+
+## 初めに
+-使用技術
+
+HTML, CSS, JavaScript, React, tailwindcs
+ TypeScript
+
+-使用注意点
+
+ルートディレクトリに.envファイルを作成してそのなかに、
+
+REACT_APP_GOOGLE_MAP_API_KEY = '   '
+REACT_APP_YOUTUBE_API_KEY = '   '
+REACT_APP_CHATGPT_API_KEY = '   '
+
+を定義して'　'の中にご自身のそれぞれのAPIキーを入力してください。
+
+## Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
